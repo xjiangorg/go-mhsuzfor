@@ -5,21 +5,7 @@ library identifier: 'RHTAP_Jenkins@release-v1.7.x', retriever: modernSCM(
    remote: 'https://github.com/redhat-appstudio/tssc-sample-jenkins.git'])
 
 pipeline {
-    agent {
-  kubernetes {
-    label 'jenkins-agent'
-    cloud 'openshift'
-    serviceAccount 'jenkins'
-    podRetention onFailure()
-    idleMinutes '5'
-    containerTemplate {
-     name 'jnlp'
-     image 'quay.io/jkopriva/rhtap-jenkins-agent:0.2'
-     ttyEnabled true
-     args '${computer.jnlpmac} ${computer.name}'
-   }
-   }
-}
+    agent any
     environment {
         ROX_API_TOKEN = credentials('ROX_API_TOKEN')
         GITOPS_AUTH_PASSWORD = credentials('GITOPS_AUTH_PASSWORD')
