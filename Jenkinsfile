@@ -19,12 +19,6 @@ pipeline {
         COSIGN_SECRET_KEY = credentials('COSIGN_SECRET_KEY')
     }
     stages {
-        stage('Hello') {
-            steps {
-                sleep 3000
-                echo 'Hello World'
-            }
-        }
         stage('init') {
             steps {
                 script {
