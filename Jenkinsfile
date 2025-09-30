@@ -5,29 +5,7 @@ library identifier: 'RHTAP_Jenkins@release-v1.7.x', retriever: modernSCM(
    remote: 'https://github.com/redhat-appstudio/tssc-sample-jenkins.git'])
 
 pipeline {
-    agent {
-          kubernetes {
-              yaml '''
-  apiVersion: v1
-  kind: Pod
-  spec:
-    containers:
-    - name: tssc
-      image: quay.io/quay_xjiang/tssc-agent:latest
-      imagePullPolicy: Always
-      command: ["sleep"]
-      args: ["infinity"]
-      resources:
-        limits:
-          memory: "1024Mi"
-          cpu: "500m"
-        requests:
-          memory: "256Mi"
-          cpu: "100m"
-              '''
-              defaultContainer 'tssc'
-          }
-      }
+    agent any
     environment {
         ROX_API_TOKEN = credentials('ROX_API_TOKEN')
         GITOPS_AUTH_PASSWORD = credentials('GITOPS_AUTH_PASSWORD')
