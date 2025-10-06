@@ -5,7 +5,9 @@ library identifier: 'RHTAP_Jenkins@release-v1.7.x', retriever: modernSCM(
    remote: 'https://github.com/redhat-appstudio/tssc-sample-jenkins.git'])
 
 pipeline {
-    agent any
+    agent {
+        label 'tssc-jenkins-agent'  // Uses your custom tssc-agent image
+    }
     environment {
         ROX_API_TOKEN = credentials('ROX_API_TOKEN')
         GITOPS_AUTH_PASSWORD = credentials('GITOPS_AUTH_PASSWORD')
